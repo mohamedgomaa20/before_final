@@ -48,6 +48,12 @@ class _GroupHomeScreenState extends State<GroupHomeScreen> {
                         return const Center(
                           child: CircularProgressIndicator(),
                         );
+                        //
+                      }
+                      if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                        return const Center(
+                          child: Text('No Groups available.'),
+                        );
                       }
                       if (snapshot.hasError) {
                         return const Center(
@@ -59,8 +65,8 @@ class _GroupHomeScreenState extends State<GroupHomeScreen> {
                             .map((e) => ChatGroup.fromJson(e.data()))
                             .toList()
                           ..sort(
-                            (a, b) =>
-                                b.lastMessageTime!.compareTo(a.lastMessageTime!),
+                            (a, b) => b.lastMessageTime!
+                                .compareTo(a.lastMessageTime!),
                           );
                         return ListView.builder(
                             // itemCount: snapshot.data!.size,
@@ -69,7 +75,7 @@ class _GroupHomeScreenState extends State<GroupHomeScreen> {
                               return GroupCard(chatGroup: items[index]);
                             });
                       } else {
-                        return Container( );
+                        return Container();
                       }
                     }),
               ),

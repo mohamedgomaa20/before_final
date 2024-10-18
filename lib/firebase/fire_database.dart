@@ -197,4 +197,11 @@ class FireData {
         .doc(myId)
         .update({'name': newName, 'about': about});
   }
+
+
+
+  sendNotification() {}
+
+
+
 }
